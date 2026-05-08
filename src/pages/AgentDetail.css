@@ -1,0 +1,185 @@
+.agent-detail__breadcrumb {
+  margin-bottom: 16px;
+}
+
+.agent-detail__breadcrumb a {
+  color: #1976d2;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.agent-detail__breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.agent-detail__not-found {
+  text-align: center;
+  padding: 48px;
+}
+
+.agent-detail__not-found a {
+  color: #1976d2;
+}
+
+.agent-detail__card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  margin-bottom: 24px;
+}
+
+.agent-detail__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.agent-detail__name {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0 0 4px;
+  color: #212121;
+}
+
+.agent-detail__desc {
+  font-size: 14px;
+  color: #757575;
+  margin: 0;
+}
+
+.agent-detail__info {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+  padding: 16px;
+  background: #fafafa;
+  border-radius: 6px;
+}
+
+.agent-detail__info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.agent-detail__label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #999;
+  text-transform: uppercase;
+}
+
+.agent-detail__mono {
+  font-family: monospace;
+  font-size: 13px;
+  word-break: break-all;
+}
+
+.agent-detail__prompt {
+  margin-bottom: 20px;
+  padding: 12px 16px;
+  background: #f5f5f5;
+  border-radius: 6px;
+}
+
+.agent-detail__prompt p {
+  margin: 8px 0 0;
+  font-size: 14px;
+  color: #424242;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+.agent-detail__actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.agent-detail__btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s;
+  display: inline-flex;
+  align-items: center;
+}
+
+.agent-detail__btn--primary {
+  background: #1976d2;
+  color: #fff;
+}
+
+.agent-detail__btn--primary:hover {
+  background: #1565c0;
+}
+
+.agent-detail__btn--secondary {
+  background: #e0e0e0;
+  color: #424242;
+}
+
+.agent-detail__btn--secondary:hover {
+  background: #bdbdbd;
+}
+
+.agent-detail__btn--danger {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.agent-detail__btn--danger:hover {
+  background: #ffcdd2;
+}
+
+.agent-detail__section {
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.agent-detail__section h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0 0 16px;
+}
+
+.agent-detail__empty {
+  color: #999;
+  font-size: 14px;
+  text-align: center;
+  padding: 24px 0;
+}
+
+.agent-detail__task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.agent-detail__task-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  background: #fafafa;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.agent-detail__task-item:hover {
+  background: #f0f0f0;
+}
+
+.agent-detail__task-title {
+  font-size: 14px;
+  color: #212121;
+}

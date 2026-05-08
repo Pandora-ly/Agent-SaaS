@@ -1,0 +1,94 @@
+.task-form {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.task-form__title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 20px;
+  color: #212121;
+}
+
+.task-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.task-form__field {
+  margin-bottom: 16px;
+}
+
+.task-form__field label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: #616161;
+  margin-bottom: 6px;
+}
+
+.task-form__field input,
+.task-form__field select,
+.task-form__field textarea {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.task-form__field input:focus,
+.task-form__field select:focus,
+.task-form__field textarea:focus {
+  border-color: #1976d2;
+}
+
+.task-form__field textarea {
+  resize: vertical;
+}
+
+.task-form__actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+.task-form__btn {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.task-form__btn--cancel {
+  background: #e0e0e0;
+  color: #424242;
+}
+
+.task-form__btn--cancel:hover {
+  background: #bdbdbd;
+}
+
+.task-form__btn--submit {
+  background: #1976d2;
+  color: #fff;
+}
+
+.task-form__btn--submit:hover:not(:disabled) {
+  background: #1565c0;
+}
+
+.task-form__btn--submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

@@ -1,0 +1,151 @@
+.dashboard__title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #212121;
+  margin: 0 0 24px;
+}
+
+.dashboard__stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.dashboard__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 768px) {
+  .dashboard__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.dashboard__section {
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.dashboard__section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.dashboard__section-header h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.dashboard__link {
+  font-size: 13px;
+  color: #1976d2;
+  text-decoration: none;
+}
+
+.dashboard__link:hover {
+  text-decoration: underline;
+}
+
+.dashboard__empty {
+  color: #999;
+  font-size: 14px;
+  text-align: center;
+  padding: 24px 0;
+}
+
+.dashboard__task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.dashboard__task-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  background: #fafafa;
+  border-radius: 6px;
+}
+
+.dashboard__task-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dashboard__task-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #212121;
+}
+
+.dashboard__task-agent {
+  font-size: 12px;
+  color: #999;
+}
+
+.dashboard__task-status {
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-weight: 500;
+}
+
+.dashboard__task-status--pending {
+  background: #f5f5f5;
+  color: #757575;
+}
+
+.dashboard__task-status--in_progress {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+.dashboard__task-status--completed {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.dashboard__agent-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.dashboard__agent-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  background: #fafafa;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.dashboard__agent-item:hover {
+  background: #f0f0f0;
+}
+
+.dashboard__agent-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #212121;
+}
+
+.dashboard__agent-model {
+  font-size: 12px;
+  color: #999;
+  background: #f0f0f0;
+  padding: 2px 8px;
+  border-radius: 4px;
+}

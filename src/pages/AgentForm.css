@@ -1,0 +1,176 @@
+.agent-form {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.agent-form__title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 20px;
+  color: #212121;
+}
+
+.agent-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 600px) {
+  .agent-form__row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.agent-form__field {
+  margin-bottom: 16px;
+}
+
+.agent-form__field label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: #616161;
+  margin-bottom: 6px;
+}
+
+.agent-form__field input[type='text'],
+.agent-form__field input[type='number'],
+.agent-form__field input[type='password'],
+.agent-form__field select,
+.agent-form__field textarea {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.agent-form__field input:focus,
+.agent-form__field select:focus,
+.agent-form__field textarea:focus {
+  border-color: #1976d2;
+}
+
+.agent-form__field input[type='password'] {
+  font-family: monospace;
+  letter-spacing: 1px;
+}
+
+.agent-form__field textarea {
+  resize: vertical;
+}
+
+.agent-form__field input[type='range'] {
+  width: 100%;
+  margin-top: 4px;
+}
+
+.agent-form__field-hint {
+  display: block;
+  font-size: 12px;
+  color: #999;
+  margin-top: 4px;
+}
+
+.agent-form__divider {
+  margin: 8px 0 16px;
+  border-top: 1px solid #eee;
+  padding-top: 16px;
+}
+
+.agent-form__toggle {
+  background: none;
+  border: none;
+  color: #1976d2;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.agent-form__toggle:hover {
+  text-decoration: underline;
+}
+
+.agent-form__toggle-hint {
+  font-size: 12px;
+  color: #999;
+}
+
+.agent-form__api-section {
+  background: #fafafa;
+  border-radius: 6px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.agent-form__api-section--required {
+  background: #fff8e1;
+  border: 1px solid #ffe082;
+}
+
+.agent-form__section-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #e65100;
+}
+
+.agent-form__required {
+  color: #c62828;
+  margin-left: 2px;
+}
+
+.agent-form__api-hint {
+  font-size: 13px;
+  color: #757575;
+  margin: 0 0 16px;
+  line-height: 1.4;
+}
+
+.agent-form__actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+.agent-form__btn {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.agent-form__btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.agent-form__btn--cancel {
+  background: #e0e0e0;
+  color: #424242;
+}
+
+.agent-form__btn--cancel:hover:not(:disabled) {
+  background: #bdbdbd;
+}
+
+.agent-form__btn--submit {
+  background: #1976d2;
+  color: #fff;
+}
+
+.agent-form__btn--submit:hover:not(:disabled) {
+  background: #1565c0;
+}
