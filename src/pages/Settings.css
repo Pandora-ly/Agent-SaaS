@@ -118,3 +118,14 @@
 .settings__danger-btn:hover {
   background: #ffebee;
 }
+
+.settings__warning {
+  background: #fff8e1;
+  border: 1px solid #ffd54f;
+  padding: 10px 14px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  color: #5d4037;
+  font-size: 13px;
+  line-height: 1.5;
+}

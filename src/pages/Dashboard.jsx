@@ -1,21 +1,18 @@
 import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
-import { fetchStats } from '../utils/api';
+import { computeStats } from '../services/stats';
+import { getTaskStatusLabel } from '../constants/task';
 import StatCard from '../components/StatCard';
 import './Dashboard.css';
 
-const STATUS_LABELS = {
-  pending: '待处理',
-  in_progress: '进行中',
-  completed: '已完成',
-};
-
 function Dashboard() {
-  const { agents, tasks } = useApp();
+  const { agents, tasks, conversations, agentMap } = useApp();
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const stats = useMemo(() => fetchStats(), [agents, tasks]);
+  const stats = useMemo(
+    () => computeStats({ agents, tasks, conversations }),
+    [agents, tasks, conversations]
+  );
 
   const recentTasks = useMemo(
     () => [...tasks].sort((a, b) => b.createdAt - a.createdAt).slice(0, 5),
@@ -52,7 +49,7 @@ function Dashboard() {
           ) : (
             <div className="dashboard__task-list">
               {recentTasks.map((task) => {
-                const agent = agents.find((a) => a.id === task.agentId);
+                const agent = agentMap.get(task.agentId);
                 return (
                   <div key={task.id} className="dashboard__task-item">
                     <div className="dashboard__task-info">
@@ -64,7 +61,7 @@ function Dashboard() {
                     <span
                       className={`dashboard__task-status dashboard__task-status--${task.status}`}
                     >
-                      {STATUS_LABELS[task.status]}
+                      {getTaskStatusLabel(task.status)}
                     </span>
                   </div>
                 );

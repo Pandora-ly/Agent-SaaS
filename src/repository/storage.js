@@ -12,8 +12,11 @@ export function getItem(key, defaultValue = null) {
 export function setItem(key, value) {
   try {
     localStorage.setItem(STORAGE_PREFIX + key, JSON.stringify(value));
+    return true;
   } catch (e) {
+    // 可能因配额超限或隐私模式失败
     console.error('localStorage 写入失败:', e);
+    return false;
   }
 }
 

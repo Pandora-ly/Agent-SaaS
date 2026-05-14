@@ -1,29 +1,24 @@
 import { useState, useMemo } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
-import { fetchConversations } from '../utils/api';
+import { getAgentStatusInfo } from '../constants/agent';
+import { getTaskStatusLabel } from '../constants/task';
+import { getProtocol } from '../constants/protocol';
 import AgentForm from './AgentForm';
 import './AgentDetail.css';
-
-const STATUS_MAP = {
-  idle: { label: '空闲', className: 'status--idle' },
-  running: { label: '运行中', className: 'status--running' },
-  error: { label: '异常', className: 'status--error' },
-};
 
 function AgentDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { agents, tasks, editAgent, removeAgent } = useApp();
+  const { agentMap, tasks, getConversations, editAgent, removeAgent } = useApp();
   const [editing, setEditing] = useState(false);
 
-  const agent = agents.find((a) => a.id === id);
+  const agent = agentMap.get(id);
   const agentTasks = useMemo(
     () => tasks.filter((t) => t.agentId === id),
     [tasks, id]
   );
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const conversations = useMemo(() => fetchConversations(id), [id, agents]);
+  const conversations = getConversations(id);
 
   if (!agent) {
     return (
@@ -34,10 +29,7 @@ function AgentDetail() {
     );
   }
 
-  const statusInfo = STATUS_MAP[agent.status] || {
-    label: agent.status,
-    className: '',
-  };
+  const statusInfo = getAgentStatusInfo(agent.status);
 
   const handleEdit = (data) => {
     editAgent(id, data);
@@ -98,16 +90,32 @@ function AgentDetail() {
               <span>{conversations.length} 条消息</span>
             </div>
             <div className="agent-detail__info-item">
-              <span className="agent-detail__label">API Base URL</span>
-              <span className="agent-detail__mono">
-                {agent.apiBaseUrl || '使用全局配置'}
+              <span className="agent-detail__label">API 配置</span>
+              <span>
+                {agent.useCustomApi
+                  ? `Agent 专属（${getProtocol(agent.protocol).label}）`
+                  : '继承全局配置'}
               </span>
             </div>
+            {agent.useCustomApi && (
+              <>
+                <div className="agent-detail__info-item">
+                  <span className="agent-detail__label">API Base URL</span>
+                  <span className="agent-detail__mono">
+                    {agent.apiBaseUrl || '—'}
+                  </span>
+                </div>
+                <div className="agent-detail__info-item">
+                  <span className="agent-detail__label">API Key</span>
+                  <span className="agent-detail__mono">
+                    {agent.apiKey ? '••••••' + agent.apiKey.slice(-4) : '—'}
+                  </span>
+                </div>
+              </>
+            )}
             <div className="agent-detail__info-item">
-              <span className="agent-detail__label">API Key</span>
-              <span className="agent-detail__mono">
-                {agent.apiKey ? '••••••' + agent.apiKey.slice(-4) : '使用全局配置'}
-              </span>
+              <span className="agent-detail__label">流式响应</span>
+              <span>{agent.stream !== false ? '开启' : '关闭'}</span>
             </div>
           </div>
 
@@ -151,20 +159,12 @@ function AgentDetail() {
         ) : (
           <div className="agent-detail__task-list">
             {agentTasks.map((task) => (
-              <Link
-                key={task.id}
-                to="/tasks"
-                className="agent-detail__task-item"
-              >
+              <Link key={task.id} to="/tasks" className="agent-detail__task-item">
                 <span className="agent-detail__task-title">{task.title}</span>
                 <span
                   className={`dashboard__task-status dashboard__task-status--${task.status}`}
                 >
-                  {task.status === 'pending'
-                    ? '待处理'
-                    : task.status === 'in_progress'
-                    ? '进行中'
-                    : '已完成'}
+                  {getTaskStatusLabel(task.status)}
                 </span>
               </Link>
             ))}

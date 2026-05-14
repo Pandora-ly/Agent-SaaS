@@ -1,0 +1,109 @@
+.api-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.api-fields__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.api-fields__field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.api-fields__field > label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #424242;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.api-fields__field input[type='text'],
+.api-fields__field input[type='password'],
+.api-fields__field input[type='number'],
+.api-fields__field select {
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: inherit;
+  background: #fff;
+}
+
+.api-fields__field input:focus,
+.api-fields__field select:focus {
+  outline: none;
+  border-color: #1976d2;
+}
+
+.api-fields__hint {
+  font-size: 12px;
+  color: #757575;
+}
+
+.api-fields__inline-btn {
+  background: none;
+  border: none;
+  color: #1976d2;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.api-fields__inline-btn:hover {
+  text-decoration: underline;
+}
+
+.api-fields__headers {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px;
+  background: #fafafa;
+  border-radius: 4px;
+  border: 1px solid #eee;
+}
+
+.api-fields__headers-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: #424242;
+}
+
+.api-fields__header-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 6px;
+  align-items: center;
+}
+
+.api-fields__header-row input {
+  padding: 6px 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+.api-fields__remove-btn {
+  background: none;
+  border: 1px solid #e0e0e0;
+  color: #c62828;
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.api-fields__remove-btn:hover {
+  background: #ffebee;
+}

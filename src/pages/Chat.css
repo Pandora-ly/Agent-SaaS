@@ -233,3 +233,51 @@
 .chat__not-found a {
   color: #1976d2;
 }
+
+.chat__protocol {
+  font-size: 11px;
+  background: #e8eaf6;
+  color: #3949ab;
+  padding: 2px 6px;
+  border-radius: 3px;
+  text-transform: uppercase;
+}
+
+.chat__stream-badge {
+  font-size: 11px;
+  background: #e8f5e9;
+  color: #2e7d32;
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+.chat__welcome-hint {
+  margin-top: 12px !important;
+  font-size: 13px;
+  color: #757575;
+}
+
+.chat__welcome-hint a {
+  color: #1976d2;
+  text-decoration: none;
+}
+
+.chat__welcome-hint a:hover {
+  text-decoration: underline;
+}
+
+.chat__stop-btn {
+  padding: 10px 20px;
+  background: #c62828;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.15s;
+  align-self: flex-end;
+}
+
+.chat__stop-btn:hover {
+  background: #b71c1c;
+}

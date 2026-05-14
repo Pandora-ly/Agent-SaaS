@@ -1,37 +1,32 @@
 import { useState, useMemo } from 'react';
 import { useApp } from '../context/AppContext';
+import {
+  TASK_STATUS,
+  TASK_STATUS_OPTIONS,
+  getTaskStatusLabel,
+  getTaskPriorityInfo,
+} from '../constants/task';
 import TaskForm from './TaskForm';
 import './TaskList.css';
 
-const STATUS_LABELS = {
-  pending: '待处理',
-  in_progress: '进行中',
-  completed: '已完成',
-};
-
-const PRIORITY_LABELS = {
-  high: { label: '高', className: 'priority--high' },
-  medium: { label: '中', className: 'priority--medium' },
-  low: { label: '低', className: 'priority--low' },
-};
+const FILTER_OPTIONS = ['all', ...TASK_STATUS_OPTIONS];
 
 function TaskList() {
-  const { agents, tasks, addTask, editTask, removeTask } = useApp();
+  const { agents, agentMap, tasks, addTask, editTask, removeTask } = useApp();
   const [showForm, setShowForm] = useState(false);
   const [filter, setFilter] = useState('all');
 
-  const filtered = useMemo(
-    () =>
-      filter === 'all'
-        ? tasks
-        : tasks.filter((t) => t.status === filter),
-    [tasks, filter]
-  );
-
-  const sorted = useMemo(
-    () => [...filtered].sort((a, b) => b.createdAt - a.createdAt),
-    [filtered]
-  );
+  // 一次遍历同时得到分组计数 + 过滤结果（避免每个 filter 按钮各跑一次 filter）
+  const { filteredSorted, counts } = useMemo(() => {
+    const c = { all: tasks.length, pending: 0, in_progress: 0, completed: 0 };
+    const result = [];
+    for (const t of tasks) {
+      if (t.status in c) c[t.status] += 1;
+      if (filter === 'all' || t.status === filter) result.push(t);
+    }
+    result.sort((a, b) => b.createdAt - a.createdAt);
+    return { filteredSorted: result, counts: c };
+  }, [tasks, filter]);
 
   const handleCreate = (data) => {
     addTask(data);
@@ -69,7 +64,7 @@ function TaskList() {
       )}
 
       <div className="task-list-page__filters">
-        {['all', 'pending', 'in_progress', 'completed'].map((status) => (
+        {FILTER_OPTIONS.map((status) => (
           <button
             key={status}
             className={`task-list-page__filter-btn ${
@@ -77,22 +72,16 @@ function TaskList() {
             }`}
             onClick={() => setFilter(status)}
           >
-            {status === 'all'
-              ? '全部'
-              : STATUS_LABELS[status]}
-            <span className="task-list-page__filter-count">
-              {status === 'all'
-                ? tasks.length
-                : tasks.filter((t) => t.status === status).length}
-            </span>
+            {status === 'all' ? '全部' : getTaskStatusLabel(status)}
+            <span className="task-list-page__filter-count">{counts[status]}</span>
           </button>
         ))}
       </div>
 
       <div className="task-list-page__list">
-        {sorted.map((task) => {
-          const agent = agents.find((a) => a.id === task.agentId);
-          const priority = PRIORITY_LABELS[task.priority] || PRIORITY_LABELS.medium;
+        {filteredSorted.map((task) => {
+          const agent = agentMap.get(task.agentId);
+          const priority = getTaskPriorityInfo(task.priority);
 
           return (
             <div key={task.id} className="task-item">
@@ -122,9 +111,11 @@ function TaskList() {
                   value={task.status}
                   onChange={(e) => handleStatusChange(task, e.target.value)}
                 >
-                  <option value="pending">待处理</option>
-                  <option value="in_progress">进行中</option>
-                  <option value="completed">已完成</option>
+                  {TASK_STATUS_OPTIONS.map((s) => (
+                    <option key={s} value={s}>
+                      {TASK_STATUS[s].label}
+                    </option>
+                  ))}
                 </select>
                 <button
                   className="task-item__delete-btn"
@@ -139,11 +130,9 @@ function TaskList() {
         })}
       </div>
 
-      {sorted.length === 0 && (
+      {filteredSorted.length === 0 && (
         <p className="task-list-page__empty">
-          {filter === 'all'
-            ? '暂无任务，点击上方按钮创建'
-            : '该状态下暂无任务'}
+          {filter === 'all' ? '暂无任务，点击上方按钮创建' : '该状态下暂无任务'}
         </p>
       )}
     </div>

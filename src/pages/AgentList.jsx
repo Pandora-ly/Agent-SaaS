@@ -1,29 +1,24 @@
 import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
+import { getAgentStatusInfo } from '../constants/agent';
 import AgentForm from './AgentForm';
 import './AgentList.css';
-
-const STATUS_MAP = {
-  idle: { label: '空闲', className: 'status--idle' },
-  running: { label: '运行中', className: 'status--running' },
-  error: { label: '异常', className: 'status--error' },
-};
 
 function AgentListPage() {
   const { agents, addAgent } = useApp();
   const [showForm, setShowForm] = useState(false);
   const [search, setSearch] = useState('');
 
-  const filtered = useMemo(
-    () =>
-      agents.filter(
-        (a) =>
-          a.name.toLowerCase().includes(search.toLowerCase()) ||
-          a.description.toLowerCase().includes(search.toLowerCase())
-      ),
-    [agents, search]
-  );
+  const filtered = useMemo(() => {
+    const q = search.toLowerCase();
+    if (!q) return agents;
+    return agents.filter(
+      (a) =>
+        a.name.toLowerCase().includes(q) ||
+        a.description.toLowerCase().includes(q)
+    );
+  }, [agents, search]);
 
   const handleCreate = (data) => {
     addAgent(data);
@@ -58,7 +53,7 @@ function AgentListPage() {
 
       <div className="agent-list-page__grid">
         {filtered.map((agent) => {
-          const statusInfo = STATUS_MAP[agent.status] || { label: agent.status, className: '' };
+          const statusInfo = getAgentStatusInfo(agent.status);
           return (
             <Link
               key={agent.id}
@@ -74,9 +69,7 @@ function AgentListPage() {
               <p className="agent-card__desc">{agent.description}</p>
               <div className="agent-card__meta">
                 <span className="agent-card__model">{agent.model}</span>
-                <span className="agent-card__temp">
-                  T: {agent.temperature}
-                </span>
+                <span className="agent-card__temp">T: {agent.temperature}</span>
               </div>
             </Link>
           );
